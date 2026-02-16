@@ -1,5 +1,9 @@
 # @nitrique/rn-proximity-reader-discovery
 
+🇺🇦 **Stand with Ukraine against the Russian invasion.** If you want to help, consider donating to [Come Back Alive](https://savelife.in.ua/en/) or [United24](https://u24.gov.ua/).
+
+---
+
 An Expo module wrapping Apple's [`ProximityReaderDiscovery`](https://developer.apple.com/documentation/proximityreader/proximityreaderdiscovery) API to present Tap to Pay on iPhone education screens.
 
 iOS 18.0+ only.
@@ -113,6 +117,10 @@ Presents Apple's system-provided education sheet explaining how to accept contac
 
 - **Returns:** `Promise<void>` — resolves when the user dismisses the sheet.
 - **Throws:** if iOS < 18.0, the entitlement is missing, or the content cannot be displayed.
+
+## Professional Services
+
+Need help integrating Tap to Pay on iPhone into your React Native app, or looking for expert mobile development? Visit [nitrique.fr](https://nitrique.fr) for consulting and development services.
 
 ## License
 
