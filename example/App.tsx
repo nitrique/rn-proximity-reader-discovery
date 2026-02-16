@@ -1,73 +1,56 @@
-import { useEvent } from 'expo';
-import RnProximityReaderDiscovery, { RnProximityReaderDiscoveryView } from 'rn-proximity-reader-discovery';
-import { Button, SafeAreaView, ScrollView, Text, View } from 'react-native';
+import { useState } from "react";
+import { presentTapToPayEducation } from "@nitrique/rn-proximity-reader-discovery";
+import { Alert, Button, StyleSheet, Text, View } from "react-native";
 
 export default function App() {
-  const onChangePayload = useEvent(RnProximityReaderDiscovery, 'onChange');
+  const [loading, setLoading] = useState(false);
+
+  const handleShow = async () => {
+    setLoading(true);
+    try {
+      await presentTapToPayEducation();
+    } catch (error: any) {
+      Alert.alert("Error", error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.container}>
-        <Text style={styles.header}>Module API Example</Text>
-        <Group name="Constants">
-          <Text>{RnProximityReaderDiscovery.PI}</Text>
-        </Group>
-        <Group name="Functions">
-          <Text>{RnProximityReaderDiscovery.hello()}</Text>
-        </Group>
-        <Group name="Async functions">
-          <Button
-            title="Set value"
-            onPress={async () => {
-              await RnProximityReaderDiscovery.setValueAsync('Hello from JS!');
-            }}
-          />
-        </Group>
-        <Group name="Events">
-          <Text>{onChangePayload?.value}</Text>
-        </Group>
-        <Group name="Views">
-          <RnProximityReaderDiscoveryView
-            url="https://www.example.com"
-            onLoad={({ nativeEvent: { url } }) => console.log(`Loaded: ${url}`)}
-            style={styles.view}
-          />
-        </Group>
-      </ScrollView>
-    </SafeAreaView>
-  );
-}
-
-function Group(props: { name: string; children: React.ReactNode }) {
-  return (
-    <View style={styles.group}>
-      <Text style={styles.groupHeader}>{props.name}</Text>
-      {props.children}
+    <View style={styles.container}>
+      <View style={styles.content}>
+        <Text style={styles.title}>ProximityReaderDiscovery</Text>
+        <Text style={styles.subtitle}>Tap to Pay on iPhone Education</Text>
+        <Button
+          title={loading ? "Presenting…" : "Show How to Tap"}
+          onPress={handleShow}
+          disabled={loading}
+        />
+      </View>
     </View>
   );
 }
 
-const styles = {
-  header: {
-    fontSize: 30,
-    margin: 20,
-  },
-  groupHeader: {
-    fontSize: 20,
-    marginBottom: 20,
-  },
-  group: {
-    margin: 20,
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    padding: 20,
-  },
+const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#eee',
+    paddingTop: 60,
+    backgroundColor: "#eee",
   },
-  view: {
+  content: {
     flex: 1,
-    height: 200,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 20,
   },
-};
+  title: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginBottom: 8,
+  },
+  subtitle: {
+    fontSize: 16,
+    color: "#666",
+    marginBottom: 32,
+  },
+});

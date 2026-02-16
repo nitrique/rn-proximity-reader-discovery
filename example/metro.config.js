@@ -19,7 +19,7 @@ config.resolver.nodeModulesPaths = [
 ];
 
 config.resolver.extraNodeModules = {
-  'rn-proximity-reader-discovery': '..',
+  '@nitrique/rn-proximity-reader-discovery': '..',
 };
 
 config.watchFolders = [path.resolve(__dirname, '..')];

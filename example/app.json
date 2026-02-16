@@ -15,18 +15,6 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "expo.modules.rnproximityreaderdiscovery.example"
-    },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      },
-      "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false,
-      "package": "expo.modules.rnproximityreaderdiscovery.example"
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
     }
   }
 }

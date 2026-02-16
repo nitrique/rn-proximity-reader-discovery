@@ -1,12 +1,21 @@
-import { NativeModule, requireNativeModule } from 'expo';
+import { requireNativeModule } from "expo";
 
-import { RnProximityReaderDiscoveryModuleEvents } from './RnProximityReaderDiscovery.types';
-
-declare class RnProximityReaderDiscoveryModule extends NativeModule<RnProximityReaderDiscoveryModuleEvents> {
-  PI: number;
-  hello(): string;
-  setValueAsync(value: string): Promise<void>;
+interface RnProximityReaderDiscoveryNativeModule {
+  show(topic: string): Promise<void>;
 }
 
-// This call loads the native module object from the JSI.
-export default requireNativeModule<RnProximityReaderDiscoveryModule>('RnProximityReaderDiscovery');
+const NativeModule =
+  requireNativeModule<RnProximityReaderDiscoveryNativeModule>(
+    "RnProximityReaderDiscovery"
+  );
+
+/**
+ * Present the Tap to Pay on iPhone education screen.
+ * Opens a system-provided modal sheet showing the user
+ * how to tap for contactless payments.
+ *
+ * Requires iOS 18.0+ and the Tap to Pay on iPhone entitlement.
+ */
+export async function presentTapToPayEducation(): Promise<void> {
+  return NativeModule.show("paymentHowToTap");
+}

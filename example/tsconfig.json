@@ -3,8 +3,8 @@
   "compilerOptions": {
     "strict": true,
     "paths": {
-      "rn-proximity-reader-discovery": ["../src/index"],
-      "rn-proximity-reader-discovery/*": ["../src/*"]
+      "@nitrique/rn-proximity-reader-discovery": ["../src/index"],
+      "@nitrique/rn-proximity-reader-discovery/*": ["../src/*"]
     }
   }
 }
