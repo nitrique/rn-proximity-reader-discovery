@@ -1,13 +1,16 @@
 import { requireNativeModule } from "expo";
+import { Platform } from "react-native";
 
 interface RnProximityReaderDiscoveryNativeModule {
   show(topic: string): Promise<void>;
 }
 
-const NativeModule =
-  requireNativeModule<RnProximityReaderDiscoveryNativeModule>(
-    "RnProximityReaderDiscovery"
-  );
+const NativeModule: RnProximityReaderDiscoveryNativeModule =
+  Platform.OS === "ios" && !Platform.isPad && !Platform.isTV && !Platform.isVision
+    ? requireNativeModule<RnProximityReaderDiscoveryNativeModule>(
+        "RnProximityReaderDiscovery"
+      )
+    : { show: () => Promise.resolve() };
 
 /**
  * Present the Tap to Pay on iPhone education screen.
